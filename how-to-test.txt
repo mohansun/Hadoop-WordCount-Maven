@@ -1,0 +1,30 @@
+#ref:http://hadoop.apache.org/docs/r1.2.1/single_node_setup.html
+#    http://hadoopi.wordpress.com/2013/05/25/setup-maven-project-for-hadoop-in-5mn/
+
+#download hadoop
+ mv /home/developer1/Downloads/hadoop-1.2.1-bin.tar.gz .
+ tar zxvf hadoop-1.2.1-bin.tar.gz 
+ cd hadoop-1.2.1/
+ cd conf/
+#add JAVA_HOME env
+ vi hadoop-env.sh 
+ cd ..
+ #test it
+ ./bin/hadoop
+
+#prepare input
+ mkdir input
+ cp conf/*.xml input/
+#run hadoop
+
+ ./bin/hadoop jar hadoop-examples-1.2.1.jar grep input output2 'comm[a-z.]+'
+#see the results
+cat output2/*
+#10	comma
+#4	communicate
+#2	commands
+#1	common
+#1	communciate
+
+#run our maven based project just built
+./bin/hadoop jar ../MapReduce/target/MapReduce-1.0-SNAPSHOT.jar org.mohans.dev.WordCount input/files output5
